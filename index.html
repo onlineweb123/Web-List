@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <title>Web List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #e9f0fa;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 360px;
+      margin: 100px auto;
+    }
+
+    .dashboard-header {
+      background-color: #004d99;
+      color: white;
+      padding: 15px 20px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .dashboard-header i {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .card-box {
+      border-radius: 15px;
+      padding: 30px 10px;
+      background: white;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .card-box h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .card-box div {
+      font-size: 16px;
+      font-weight: 600;
+      color: #004d99;
+    }
+
+    #sideMenu {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 250px;
+      height: 100%;
+      background: #004d99;
+      color: white;
+      padding: 20px;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+
+    #sideMenu ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    #sideMenu ul li {
+      margin: 15px 0;
+    }
+
+    #sideMenu ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.3);
+      width: 100%;
+      height: 100%;
+      z-index: 900;
+      display: none;
+    }
+
+    .back-btn {
+      float: right;
+      margin-top: 10px;
+      background: none;
+      border: none;
+      color: #004d99;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .btn-blue {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-blue:hover {
+      background-color: #0056b3;
+    }
+
+    .d-none {
+      display: none !important;
+    }
+    
+ 
+    <!-- -->
+    .wide-box {
+  border-radius: 15px;
+  padding: 20px;
+  background: white;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  height: 100px;      /* குறைந்த உயரம் */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wide-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+.wide-box h2 {
+  font-size: 24px;
+  margin-right: 15px;
+}
+.wide-box div {
+  font-size: 18px;
+  font-weight: 600;
+  color: #004d99;
+}
+       
+   <!-- -->
+    
+    
+    
+    
+    
+  </style>
+</head>
+<body>
+
+<!-- Login Section -->
+<div id="loginSection">
+  <div class="login-box">
+    <h4 class="text-center mb-4 text-primary fw-bold">Web List Login</h4>
+    <form onsubmit="return login()">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" id="username" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" id="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-blue w-100">Login</button>
+      <div id="error" class="text-danger text-center mt-2 d-none">❌ Invalid credentials</div>
+    </form>
+  </div>
+</div>
+
+<!-- Dashboard Section -->
+<div id="dashboardSection" class="d-none">
+  <!-- Side Menu -->
+  <div id="sideMenu">
+    <h4 class="mb-4">📋 Menu</h4>
+    <ul>
+      <li><a onclick="showPage('dashboard')">🏠 Dashboard</a></li>
+      <li><a href="">👨‍🔧 Service Man</a></li>
+      <li><a href="">💰 Salary</a></li>
+      <li><a href="">📝 Bill Amount</a></li>
+      <li><a href="">📦 Others</a></li>
+  
+      <li><a onclick="logout()">🔓 Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" onclick="toggleMenu()"></div>
+
+  <!-- Header -->
+  <div class="dashboard-header">
+    <i class="bi bi-list" onclick="toggleMenu()"></i>
+    <span id="pageTitle">Web List Dashboard</span>
+  </div>
+  
+  <!-- ----------------------- -->
+ 
+
+  <!-- Main Dashboard Page -->
+  
+  
+  
+  
+  <div id="dashboardPage" class="container mt-4 pageSection">
+    <div class="row g-4">
+      <div class="col-6">
+        <a href="">
+          <div class="card-box">
+            <h2>👨‍🔧</h2>
+            <div>Service Man</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6">
+        <a href="">
+          <div class="card-box">
+            <h2>💰</h2>
+            <div>Salary</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6">
+        <a href="">
+          <div class="card-box">
+            <h2>📝</h2>
+            <div>Bill Amount</div>
+          </div>
+        </a>
+      </div>
+      
+       <div class="col-6">
+        <a href="                  ">
+          <div class="card-box">
+            <h2>📊</h2>
+            <div>Track</div>
+          </div>
+        </a>
+      </div>             
+                      
+ 
+
+     
+      
+    </div>
+  </div>
+  
+  <!--  Main Dashboard Page  முடிவு -->
+  
+  
+ 
+   <!-- Box 2 ஆரம்பம்  -->
+   
+  <br>
+  
+  
+  <div class="col-12">
+  <a href="https://onlineweb123.github.io/Web-Creative-Lab/">
+    <div class="wide-box">
+      <h2>🌀</h2>
+      <div> Aplication Form </div>
+    </div>
+  </a>
+</div><br>
+
+
+
+
+
+
+   
+   <!-- Box 2 முடிவு     -->
+  
+  
+  
+  
+
+  <!-- Others Page -->
+  <div id="othersPage" class="container mt-4 pageSection d-none">
+    <button class="back-btn" onclick="showPage('dashboard')">← Back</button>
+    <p class="mt-4">📦 Extra Own Page Content Here</p>
+  </div>
+</div>  
+
+<!-- Script -->
+<script>
+  function login() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    if (user === "Admin" && pass === "12345") {
+      document.getElementById("loginSection").classList.add("d-none");
+      document.getElementById("dashboardSection").classList.remove("d-none");
+      showPage('dashboard');
+    } else {
+      document.getElementById("error").classList.remove("d-none");
+    }
+    return false;
+  }
+
+  function toggleMenu() {
+    const menu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
+    if (menu.style.left === "0px") {
+      menu.style.left = "-260px";
+      overlay.style.display = "none";
+    } else {
+      menu.style.left = "0px";
+      overlay.style.display = "block";
+    }
+  }
+
+  function closeMenu() {
+    document.getElementById("sideMenu").style.left = "-260px";
+    document.getElementById("overlay").style.display = "none";
+  }
+
+  function showPage(page) {
+    const pages = ['dashboard', 'others'];
+    const titles = {
+      dashboard: 'Relax Admin Dashboard',
+      others: '📦 Others'
+    };
+    pages.forEach(p => {
+      document.getElementById(p + "Page").classList.add("d-none");
+    });
+    document.getElementById(page + "Page").classList.remove("d-none");
+    document.getElementById("pageTitle").textContent = titles[page];
+    closeMenu();
+  }
+
+  function logout() {
+    document.getElementById("dashboardSection").classList.add("d-none");
+    document.getElementById("loginSection").classList.remove("d-none");
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("error").classList.add("d-none");
+    showPage('dashboard');
+    closeMenu();
+  }
+</script>
+</body>
+</html>
